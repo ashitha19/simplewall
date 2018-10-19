@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Simple Wall page !!</title>    
+  </head>
+  <body class="bg-light">
+    <div class="container">
+
+        <div class="row" >          
+          <h4 class="text-left col-md-6">Simple wall(simplified)</h4>
+          <h5 class="text-center col-md-5">Welcome {{session['login_first_name']}} !</h5>
+          <a href='logout'>logout</a>
+        </div>
+
+        <hr>
+
+    <div class="row">
+
+        <div class="col-md-6 order-md-2 mb-4">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+              <span>Send a message!</span>              
+            </h4>
+            <div class="card">
+                {% with flash_messages = get_flashed_messages()%}
+                    {% if flash_messages %}
+                        {% for message in flash_messages %}
+                            <span class="text-success">{{message}}</span>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}                                      
+            {% for result in results %}            
+            <form class=" p-2 mb-5" action='/send_message' method='POST'>                 
+                <div class="row">
+                    <div class="col-md-3 mb-2">
+                            {{result['userid']}}
+                      <label>{{result['first_name']}}</label>
+                    </div>
+                    <div class="col-md-7 mb-10">
+                      <textarea type="text" class="form-control" placeholder="" value="" name="message" ></textarea>
+                    </div>
+                    <hr>
+                    <input type="hidden" name='send_to' value="{{result['userid']}}">
+                    <div class="col-md-2 mb-2">                
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </div>
+                </div>
+            </form>            
+            {% endfor %}
+            </div>  
+
+        </div>
+
+        <div class="col-md-6 order-md-1 mb-4">            
+
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+              <span>Message(s) for you ({{session['login_first_name']}})</span>              
+            </h4>
+            <div class="needs-validation card p-10 align-items-right">
+                {% for msg_result in msg_results %}
+                    <form action='/delete' method="POST">
+                        <span class="text-info">{{msg_result['first_name']}} said (3hours ago):</span><br>
+                        <span class="text-primary">"{{msg_result['description']}} "</span>
+                        <a href="/delete/{{msg_result['msg_id']}}" class="text-danger">delete</a>
+                        <hr>
+                    </form>
+                {% endfor %} 
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>

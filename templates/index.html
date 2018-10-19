@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Login and Registration form !!</title>    
+  </head>
+  <body class="bg-light">
+                     
+    <div class="container">
+        <div class="py-5 text-center">          
+          <h2>Login and Registration</h2>
+        </div> 
+    <div class="row">
+
+        <div class="col-md-4 order-md-2 mb-4">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+              <span class="text-muted">Login here!</span>              
+            </h4>            
+            
+            <form class="card p-2" action='/process_login' method='POST'>
+                <div class="text-danger">
+                        {%with errors = get_flashed_messages()%}
+                            {% if errors %}
+                                {% for error in errors %}
+                                    {{error}} <br>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}                           
+                </div> 
+            <div class="row">
+                <div class="col-md-10 mb-3">
+                  <label for="email">Email</label>
+                  <input type="text" class="form-control"  name="login_email" >
+                  <div class="invalid-feedback">
+                    Valid Email is required.
+                  </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 mb-3">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control" name="login_password" >
+                  <div class="invalid-feedback">
+                    Valid last name is required.
+                  </div>
+                </div>
+            </div>
+            <hr>
+            <div class="input-group">                
+                  <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+            </form>
+        </div>
+
+        <div class="col-md-8 order-md-1 mb-4">            
+
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+              <span class="text-muted">Register here!</span>              
+            </h4>      
+
+            <form class="needs-validation card p-10 align-items-right" novalidate  action='/process_registration' method='POST'>
+            <div class="text-danger">
+                {%with errors = get_flashed_messages()%}
+                    {% if errors %}
+                        {% for error in errors %}
+                            {{error}}<br>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}                           
+            </div> 
+                        <div class="col-md-6 mb-3">
+                            <label for="firstName">First name</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="" value=""  name="first_name" required>
+                            <div class="invalid-feedback">
+                                Valid first name is required.
+                            </div>
+                        </div>              
+              
+                        <div class="col-md-6 mb-3">
+                            <label for="lastName">Last name</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="" value="" name="last_name" required>
+                                <div class="invalid-feedback">
+                                    Valid last name is required.
+                                </div>
+                        </div>              
+
+                        <div class="col-md-6 mb-3">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email">
+                            <div class="invalid-feedback">
+                            Please enter a valid email address for shipping updates.
+                            </div>
+                        </div>
+    
+                        <div class="col-md-6 mb-3">
+                            <label for="address">Password</label>
+                            <input type="password" class="form-control" id="address" name="password" required>
+                            <div class="invalid-feedback">
+                            Please enter your shipping address.
+                            </div>
+                        </div>
+    
+                        <div class="col-md-6 mb-3">
+                            <label for="address2">Confirm Password </label>
+                            <input type="password" class="form-control" id="address2" name="confirm_password">
+                        </div>                          
+                <hr >
+                <div class="col-md-6 mb-3">
+                    <button class="col-md-4 btn btn-primary" type="submit">Register</button>
+                </div>            
+            </form>
+        </div>
+    </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
