@@ -30,7 +30,7 @@ def success_login():
         return render_template('chat.html', msg = msg)    
         
 
-@app.route('/process_registration', methods=['POST'])
+@app.route('/register', methods=['POST'])
 def process():
     #get values from form
     first_name = request.form['first_name']
@@ -98,7 +98,7 @@ def process():
     # redirect to success page
     return redirect("/success_reg")
 
-@app.route('/process_login', methods=['POST'])
+@app.route('/login', methods=['POST'])
 def login_check():
     email = request.form['email']
     password = request.form['password']
@@ -164,6 +164,7 @@ def display_chat():
     #Get all messages fro the logged in user
     mysql=connectToMySQL("simplewall")
     #query="SELECT * FROM messages WHERE sentto_userid in (%(userid)s);"
+    
     query = "SELECT a.first_name, b.msg_id, b.description from users a, messages b WHERE b.sentto_userid = %(userid)s AND a.userid=b.user_userid "
     data={
         'userid' : session['login_userid']
